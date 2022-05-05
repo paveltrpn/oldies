@@ -1,0 +1,15 @@
+!!ARBvp1.0
+
+PARAM mvp[4] = { state.matrix.mvp };
+
+ATTRIB iPos = vertex.attrib[0];
+ATTRIB iNormal = vertex.attrib[1];
+
+DP4 result.position.x, mvp[0], iPos;
+DP4 result.position.y, mvp[1], iPos;
+DP4 result.position.z, mvp[2], iPos;
+DP4 result.position.w, mvp[3], iPos;
+
+MAD result.texcoord[0], iNormal, 0.5, 0.5;
+
+END

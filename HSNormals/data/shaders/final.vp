@@ -1,0 +1,33 @@
+!!ARBvp1.0
+
+PARAM mvp[4] = { state.matrix.mvp };
+PARAM mv[4] = { state.matrix.modelview };
+
+PARAM size = program.env[0];			# width, height
+PARAM camera = program.env[1];			# camera
+
+ATTRIB iPos = vertex.position;
+
+TEMP xyz;
+
+DP4 xyz.x, mvp[0], iPos;
+DP4 xyz.y, mvp[1], iPos;
+DP4 xyz.z, mvp[2], iPos;
+DP4 xyz.w, mvp[3], iPos;
+
+MOV result.position, xyz;
+
+RCP xyz.w, xyz.w;
+MUL xyz, xyz, xyz.w;
+MAD xyz, xyz, 0.5, 0.5;
+MUL result.texcoord[0], xyz, size;
+
+SUB xyz, iPos, camera;
+DP3 xyz.w, xyz, xyz;
+RSQ xyz.w, xyz.w;
+MUL result.texcoord[1], xyz, xyz.w;
+
+MOV result.texcoord[2], mv[0];
+MOV result.texcoord[3], mv[1];
+
+END

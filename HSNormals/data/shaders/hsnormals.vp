@@ -1,0 +1,49 @@
+!!ARBvp1.0
+
+PARAM mvp[4] = { state.matrix.mvp };
+PARAM size = program.env[0];			# width, height
+
+ATTRIB iPos = vertex.attrib[0];
+ATTRIB vertex_0 = vertex.attrib[1];
+ATTRIB vertex_1 = vertex.attrib[2];
+ATTRIB vertex_2 = vertex.attrib[3];
+ATTRIB normal = vertex.attrib[4];
+
+DP4 result.position.x, mvp[0], iPos;
+DP4 result.position.y, mvp[1], iPos;
+DP4 result.position.z, mvp[2], iPos;
+DP4 result.position.w, mvp[3], iPos;
+
+TEMP xyz;
+
+DP4 xyz.x, mvp[0], vertex_0;
+DP4 xyz.y, mvp[1], vertex_0;
+DP4 xyz.z, mvp[2], vertex_0;
+DP4 xyz.w, mvp[3], vertex_0;
+RCP xyz.w, xyz.w;
+MUL xyz, xyz, xyz.w;
+MAD xyz, xyz, 0.5, 0.5;
+MUL result.texcoord[0], xyz, size;
+MOV result.texcoord[0].w, normal.x;
+
+DP4 xyz.x, mvp[0], vertex_1;
+DP4 xyz.y, mvp[1], vertex_1;
+DP4 xyz.z, mvp[2], vertex_1;
+DP4 xyz.w, mvp[3], vertex_1;
+RCP xyz.w, xyz.w;
+MUL xyz, xyz, xyz.w;
+MAD xyz, xyz, 0.5, 0.5;
+MUL result.texcoord[1], xyz, size;
+MOV result.texcoord[1].w, normal.y;
+
+DP4 xyz.x, mvp[0], vertex_2;
+DP4 xyz.y, mvp[1], vertex_2;
+DP4 xyz.z, mvp[2], vertex_2;
+DP4 xyz.w, mvp[3], vertex_2;
+RCP xyz.w, xyz.w;
+MUL xyz, xyz, xyz.w;
+MAD xyz, xyz, 0.5, 0.5;
+MUL result.texcoord[2], xyz, size;
+MOV result.texcoord[2].w, normal.z;
+
+END

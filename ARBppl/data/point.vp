@@ -1,0 +1,38 @@
+!!ARBvp1.0
+
+ATTRIB iPos = vertex.position;
+ATTRIB iNormal = vertex.normal;
+
+PARAM mvp[4] = { state.matrix.mvp };
+PARAM mvi[4] = { state.matrix.modelview.inverse };
+PARAM light = state.light[0].position;
+
+OUTPUT oPos = result.position;
+OUTPUT oColor = result.color;
+OUTPUT oTexCoord2d = result.texcoord[0];
+OUTPUT oTexCoord1d = result.texcoord[1];
+
+# shader
+
+DP4 oPos.x, mvp[0], iPos;
+DP4 oPos.y, mvp[1], iPos;
+DP4 oPos.z, mvp[2], iPos;
+DP4 oPos.w, mvp[3], iPos;
+
+TEMP xfLight;
+DP4 xfLight.x, mvi[0], light;
+DP4 xfLight.y, mvi[1], light;
+DP4 xfLight.z, mvi[2], light;
+DP4 xfLight.w, mvi[3], light;
+
+TEMP texCoord;
+SUB texCoord, iPos, xfLight;
+MAD texCoord, texCoord, 0.01, 0.5;
+
+MOV oTexCoord2d.x, texCoord.x;
+MOV oTexCoord2d.y, texCoord.y;
+MOV oTexCoord1d.x, texCoord.z;
+
+MOV oColor, 1;
+
+END

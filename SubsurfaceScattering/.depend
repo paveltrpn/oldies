@@ -1,0 +1,17 @@
+main.o: main.cpp framework/GLApp.h framework/GLExt.h \
+ framework/RenderTarget.h framework/MathLib.h framework/Mesh.h \
+ framework/Vector.h framework/MathLib.h framework/Shader.h \
+ framework/Texture.h framework/Image.h framework/Font.h
+GLApp.o: framework/GLApp.cpp framework/GLApp.h
+GLExt.o: framework/GLExt.cpp framework/GLExt.h
+RenderTarget.o: framework/RenderTarget.cpp framework/Texture.h \
+ framework/RenderTarget.h
+MathLib.o: framework/MathLib.cpp framework/MathLib.h
+Mesh.o: framework/Mesh.cpp framework/GLExt.h framework/Mesh.h \
+ framework/Vector.h framework/MathLib.h
+Shader.o: framework/Shader.cpp framework/GLExt.h framework/Shader.h \
+ framework/Vector.h
+Image.o: framework/Image.cpp framework/Image.h
+Texture.o: framework/Texture.cpp framework/GLExt.h framework/Image.h \
+ framework/Texture.h
+Font.o: framework/Font.cpp framework/Image.h framework/Font.h

@@ -1,0 +1,20 @@
+!!ARBvp1.0
+
+ATTRIB iPos = vertex.position;
+ATTRIB iTexCoord = vertex.texcoord;
+
+PARAM mvp[4] = { state.matrix.mvp };
+
+DP4 result.position.x, mvp[0], iPos;
+DP4 result.position.y, mvp[1], iPos;
+DP4 result.position.z, mvp[2], iPos;
+DP4 result.position.w, mvp[3], iPos;
+
+MOV result.texcoord[0], iTexCoord;
+MOV result.texcoord[1], iTexCoord;
+MOV result.texcoord[2], iTexCoord;
+MOV result.texcoord[3], iTexCoord;
+
+MOV result.color, 1;
+
+END

@@ -1,0 +1,69 @@
+mesh {
+	 audi.3ds
+}
+material {
+	diffuse: side.jpg
+	surface: kuzov_lod2
+}
+material {
+	diffuse: front.jpg
+	surface: kuzov_lod3
+}
+material {
+	diffuse: rear.jpg
+	surface: kuzov_lod4
+}
+material {
+	diffuse: roof.jpg
+	surface: roof-FACES
+}
+material {
+	diffuse: panel.jpg
+	surface: panel-FAC1
+}
+material {
+	diffuse: st_wheel.jpg
+	surface: panel-FACE
+}
+material {
+	diffuse: wheel.jpg
+	surface: wheel-FACE
+	surface: wheel_rea1
+	surface: wheel_rea3
+	surface: wheel01-FA
+}
+material {
+	diffuse: mirror.jpg
+	surface: kuzov_lod6
+}
+material {
+	diffuse: light.jpg
+	surface: kuzov_lod7
+}
+material {
+	diffuse: roof_cap.jpg
+	surface: kuzov_lo11
+}
+material {
+	diffuse: seat.jpg
+	surface: seat_lod1-
+	surface: seat_lod11
+	surface: seat_lod12
+	surface: seat_lod13
+	surface: kuzov_lod5
+}
+material {
+	diffuse: seat_1.jpg
+	surface: kuzov_lod8
+	surface: kuzov_lod9
+}
+material {
+	diffuse: panel1.jpg
+	surface: panel-FAC2
+}
+
+material {
+	env: side.jpg
+	surface: kuzov_lo10
+	surface: roof-FACE1
+}

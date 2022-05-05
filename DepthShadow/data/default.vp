@@ -1,0 +1,53 @@
+!!ARBvp1.0
+
+ATTRIB iPos = vertex.position;
+ATTRIB iNormal = vertex.normal;
+ATTRIB iTexCoord = vertex.texcoord;
+
+PARAM mvp[4] = { state.matrix.mvp };
+PARAM transform[4] = { state.matrix.program[0].inverse };
+
+PARAM light = program.env[0];
+PARAM camera = program.env[1];
+
+TEMP dir, transform_light, transform_camera, temp;
+
+DP4 result.position.x, mvp[0], iPos;
+DP4 result.position.y, mvp[1], iPos;
+DP4 result.position.z, mvp[2], iPos;
+DP4 result.position.w, mvp[3], iPos;
+
+DP4 transform_light.x, transform[0], light;
+DP4 transform_light.y, transform[1], light;
+DP4 transform_light.z, transform[2], light;
+DP4 transform_light.w, transform[3], light;
+
+DP4 transform_camera.x, transform[0], camera;
+DP4 transform_camera.y, transform[1], camera;
+DP4 transform_camera.z, transform[2], camera;
+DP4 transform_camera.w, transform[3], camera;
+
+SUB dir, transform_light, iPos;
+DP3 dir.w, dir, dir;
+RSQ dir.w, dir.w;
+MUL dir.xyz, dir, dir.w;
+
+DP3 temp.x, dir, iNormal;
+
+SUB dir, transform_light, iPos;
+ADD dir, transform_camera, dir;
+DP3 dir.w, dir, dir;
+RSQ dir.w, dir.w;
+MUL dir.xyz, dir, dir.w;
+
+DP3 temp.y, dir, iNormal;
+
+MOV temp.w, 32;
+
+LIT dir, temp;
+
+ADD result.color, dir.y, dir.z;
+
+MOV result.texcoord[0], iTexCoord;
+
+END

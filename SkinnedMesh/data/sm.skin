@@ -1,0 +1,4 @@
+l_leglft,l_legrt,data/proto_legs1.jpg
+u_body,u_lftarm,u_rtarm,data/proto_body1.jpg
+u_stim1,u_stim2,data/proto_stim1.jpg
+u_head,data/proto_head1.jpg

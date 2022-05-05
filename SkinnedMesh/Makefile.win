@@ -1,0 +1,15 @@
+!include <win32.mak>
+
+LIBS = $(conlibs) opengl32.lib glu32.lib glut32.lib
+
+TARGETS = skinnedmesh.exe
+OBJS = main.obj mathlib.obj skinnedmesh.obj loadjpeg.obj loadtga.obj
+
+all: $(TARGETS)
+
+$(TARGETS): $(OBJS)
+    $(link) $(conflags) -out:$(TARGETS) $(OBJS) $(LIBS)
+
+clean:
+    del *.obj
+    del $(TARGETS)
